@@ -23,7 +23,8 @@ public class AklatGUI {
 	public void validateLogin(String username, char[] password, int state){
 		if(state == LoginFrame.ADMIN_STATE && username.equals("Mike") && new String(password).equals("12345")){
 			System.out.println("LOGGED IN as admin");
-			// login.dispose();
+			login.dispose();
+			
 		}else if(state == LoginFrame.BORROWER_STATE && username.equals("Mike") && new String(password).equals("54321")){
 			System.out.println("LOGGED IN as borrower");
 			// login.dispose();

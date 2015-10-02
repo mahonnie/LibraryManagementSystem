@@ -16,6 +16,7 @@ public class LoginFrame extends JFrame implements KeyListener{
 	private JButton		signInButton;
 	private JButton		loginAsButton;
 	private JLabel		label;
+	private JLabel 		background;
 
 	private AklatGUI 		aklat;
 	private int 		state; 			// this is to tell whether its in borrower panel or admin
@@ -38,7 +39,8 @@ public class LoginFrame extends JFrame implements KeyListener{
 		JLabel logo = new JLabel(ImageLoader.logo);		// image of logo as JLabel
 		passwordField = new JPasswordField();			// for passwordField
 		signInButton = new JButton("S i g n  I n");		// for sign in button
-		setContentPane(new JLabel(ImageLoader.background_borrower));	// for background image
+		background = new JLabel(ImageLoader.background_borrower);
+		setContentPane(background);	// for background image
 		label = new JLabel("B O R R O W E R");
 
 		// PREPARE LOGIN CONTENT PANE
@@ -166,12 +168,13 @@ public class LoginFrame extends JFrame implements KeyListener{
 			label.setText("A D M I N");
 			loginAsButton.setText("( Sign in as Borrower )");
 			state = ADMIN_STATE;
-			setContentPane(new JLabel(ImageLoader.background_admin));
+			background.setIcon(ImageLoader.background_admin);
 		}else{
 			System.out.println("Sign in as Borrower");
 			label.setText("B O R R O W E R");
 			loginAsButton.setText("( Sign in as Admin )");
 			state = BORROWER_STATE;
+			background.setIcon(ImageLoader.background_borrower);
 		}
 	}
 }
