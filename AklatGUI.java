@@ -1,6 +1,6 @@
 package LMS;
 
-import LMS.frames.LoginFrame;
+import LMS.frames.*;
 import LMS.images.ImageLoader;
 
 import javax.swing.*;
@@ -9,7 +9,7 @@ import java.awt.event.*;
 
 public class AklatGUI {
 	private LoginFrame login;
-	private JFrame mainFrame;
+	private AdminFrame admin;
 
 	public AklatGUI(){
 		ImageLoader.init();
@@ -24,7 +24,7 @@ public class AklatGUI {
 		if(state == LoginFrame.ADMIN_STATE && username.equals("Mike") && new String(password).equals("12345")){
 			System.out.println("LOGGED IN as admin");
 			login.dispose();
-			
+			admin = new AdminFrame(this);
 		}else if(state == LoginFrame.BORROWER_STATE && username.equals("Mike") && new String(password).equals("54321")){
 			System.out.println("LOGGED IN as borrower");
 			// login.dispose();

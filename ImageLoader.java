@@ -11,6 +11,7 @@ public class ImageLoader {
 	public static ImageIcon background_borrower;
 	public static ImageIcon background_admin;
 	public static ImageIcon logo;
+	public static ImageIcon admin_b;
 
   public static void init(){
 	BufferedImage img = null;
@@ -18,6 +19,7 @@ public class ImageLoader {
 	    background_borrower = new ImageIcon("images/b2.jpg");
 	    background_admin = new ImageIcon("images/b1.jpg");
 	    logo = new ImageIcon("images/logo.png");
+	    admin_b = new ImageIcon("images/admin_b.jpg");
     } catch (Exception e) {}
   }
 }
