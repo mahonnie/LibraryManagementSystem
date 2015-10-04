@@ -32,21 +32,49 @@ public class LoginFrame extends JFrame implements KeyListener{
 	}
 
 	private void initComponents() {						// FOR INITIALIZING COMPONENTS
-
-		// INITIALIZE and INSTANTIATE variables
-		state = BORROWER_STATE;							// initialize user to borrower
+		initializeVariables();
 		JPanel gap_Space = new JPanel();					// space above logo
 		JLabel logo = new JLabel(ImageLoader.logo);			// image of logo as JLabel
+		// PREPARE LOGIN CONTENT PANE
+		getContentPane().setPreferredSize(new Dimension(800,600));
+		getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));// aligns the elements in y axis
+		setComponents();
+		addListeners();
+		// PREPARE SPACE BEFORE LOGO
+		gap_Space.setMaximumSize(new Dimension(30,85));
+		gap_Space.setOpaque(false);
+		logo.setAlignmentX(Component.CENTER_ALIGNMENT);
+		// ADD COMPONENTS TO THE CONTENT PANE
+		getContentPane().add(loginAsButton);
+		getContentPane().add(gap_Space);
+		getContentPane().add(logo);
+		getContentPane().add(label);
+		getContentPane().add(userTextField);
+		getContentPane().add(passwordField);
+		getContentPane().add(loginAsButton);
+		getContentPane().add(signInButton);
+		pack();
+	}
+
+	private void readyFrame() {
+		setResizable(false);
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setVisible(true);
+		setPreferredSize(new Dimension(800,600));
+	}
+
+	private void initializeVariables(){
+		// INITIALIZE and INSTANTIATE variables
+		state = BORROWER_STATE;							// initialize user to borrower
 		passwordField = new JPasswordField();				// for passwordField
 		signInButton = new JButton("S i g n  I n");			// for sign in button
 		background = new JLabel(ImageLoader.background_borrower);
 		setContentPane(background);						// for background image
 		label = new JLabel("B O R R O W E R");
+	}
 
-		// PREPARE LOGIN CONTENT PANE
-		getContentPane().setPreferredSize(new Dimension(800,600));
-		getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));// aligns the elements in y axis
-
+	private void setComponents(){
 		// PREPARE "SIGN IN AS (USER)" LABEL
 		loginAsButton =  new JButton("( Sign in as Admin )");			// clickable label for switching users
 		loginAsButton.setMaximumSize(new Dimension(180, 25));
@@ -58,32 +86,14 @@ public class LoginFrame extends JFrame implements KeyListener{
         	loginAsButton.setOpaque(false);						// for transparency
 		loginAsButton.setForeground(Color.WHITE);
 		loginAsButton.setFont(new Font("Verdana", Font.PLAIN, 12));
-
-		loginAsButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e){
-				switchUser();
-            	}
-		});
-		loginAsButton.addMouseListener(new MouseAdapter() {
-		    public void mouseEntered(MouseEvent event) {
-		        loginAsButton.setForeground(new Color(228, 228, 228));
-		    }
-
-		    public void mouseExited(MouseEvent event) {
-		        loginAsButton.setForeground(Color.WHITE);
-		    }
-		});
-
 		// PREPARE TEXT AND PASSWORD FIELDS AND SIGN-IN BUTTON
 		userTextField = new JTextField();						// for textfield
 		userTextField.setMaximumSize(new Dimension(200, 40));
 		userTextField.setPreferredSize(new Dimension(200, 40));
 		userTextField.setAlignmentX(Component.CENTER_ALIGNMENT);
-
 		passwordField.setMaximumSize(new Dimension(200, 40));
 		passwordField.setPreferredSize(new Dimension(200, 40));
 		passwordField.setAlignmentX(Component.CENTER_ALIGNMENT);
-
 		signInButton.setMaximumSize(new Dimension(175, 45));
 		signInButton.setPreferredSize(new Dimension(175, 45));
 		signInButton.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -94,6 +104,14 @@ public class LoginFrame extends JFrame implements KeyListener{
 		signInButton.setForeground(Color.WHITE);
 		signInButton.setFont(new Font("Verdana", Font.BOLD, 17));
 		signInButton.setBorder(BorderFactory.createLineBorder(Color.WHITE, 3));
+		// PREPARE LABEL THAT WILL INDICATE WHICH USER
+		label.setFont(new Font("Verdana", Font.PLAIN, 14));
+		label.setBorder(BorderFactory.createEmptyBorder(6, 0, 8, 0));
+		label.setForeground(Color.WHITE);
+		label.setAlignmentX(Component.CENTER_ALIGNMENT);
+	}
+
+	private void addListeners(){
 		signInButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 				login();
@@ -110,40 +128,22 @@ public class LoginFrame extends JFrame implements KeyListener{
 			  signInButton.setBorder(BorderFactory.createLineBorder(Color.WHITE, 3));
 		    }
 		});
+		loginAsButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				switchUser();
+            	}
+		});
+		loginAsButton.addMouseListener(new MouseAdapter() {
+		    public void mouseEntered(MouseEvent event) {
+		        loginAsButton.setForeground(new Color(228, 228, 228));
+		    }
 
-		// PREPARE LABEL THAT WILL INDICATE WHICH USER
-		label.setFont(new Font("Verdana", Font.PLAIN, 14));
-		label.setBorder(BorderFactory.createEmptyBorder(6, 0, 8, 0));
-		label.setForeground(Color.WHITE);
-		label.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-		// PREPARE SPACE BEFORE LOGO
-		gap_Space.setMaximumSize(new Dimension(30,85));
-		gap_Space.setOpaque(false);
-		logo.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-		// ADD COMPONENTS TO THE CONTENT PANE
-		getContentPane().add(loginAsButton);
-		getContentPane().add(gap_Space);
-		getContentPane().add(logo);
-		getContentPane().add(label);
-		getContentPane().add(userTextField);
-		getContentPane().add(passwordField);
-		getContentPane().add(loginAsButton);
-		getContentPane().add(signInButton);
-
+		    public void mouseExited(MouseEvent event) {
+		        loginAsButton.setForeground(Color.WHITE);
+		    }
+		});
 		userTextField.addKeyListener(this);
 		passwordField.addKeyListener(this);
-
-		pack();
-	}
-
-	private void readyFrame() {
-		setResizable(false);
-		setLocationRelativeTo(null);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setVisible(true);
-		setPreferredSize(new Dimension(800,600));
 	}
 
 	// KeyListener STUFF
